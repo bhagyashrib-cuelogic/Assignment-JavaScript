@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/Profile.css">
+        <title>Profile</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="image-preview" id="imagePreview">
+                <img src="" alt="image Preview" class="image-preview__image" id="viewProfile">
+            </div>
+            <input type="text" class="input1" id="FNAME" name="fname"  disabled>
+            <input type="text" class="input2" id="LNAME" name="fname" disabled><br>
+            <input type="text" class="email" id="email" disabled><br>
+            <input type="text" class="gender" id="gender" disabled><br>
+            <input type="text"  class="add" id="add" disabled><br>
+            <button type="button" id="btn" onclick="editFname(); editLname();editemail();editgender();editadd();visible('btn1');">Edit Profile</button>
+            <button type="button"  id="btn1" onclick="savedata(); editFname1();editLname1();editgender1();email();editadd1();">Save</button>
+        </div>
+        <script src="JSFiles/Profile.js"></script>
+    </body>
+</html>
