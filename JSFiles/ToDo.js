@@ -1,20 +1,8 @@
-    // let Userdata = sessionStorage.getItem('Key');
-    // let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
-    // let toDoData;
-
-    // for (let t of Localdata) {
-    //     if (t.Email == Userdata) {
-    //         toDoData = t;
-    //     }
-    // }
-
-
-
+let e=0;
 //*********************************************************************************REDIRECT
 function redirect() {
   window.location.href = "./Profile.html";
 }
-
 //*********************************************************************************LOGOUT
 function logoutUser() {
   if (confirm("Do you want to logout?")) {
@@ -31,10 +19,8 @@ var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 
 addButtton.onclick = function () {
-    // document.location.reload();
       modal.style.display = "block";
 }
-
 
 span.onclick = function () {
   modal.style.display = "none";
@@ -50,7 +36,6 @@ window.onclick = function (event) {
 
 //**********************************************************************************ADDTODO
 function addtodo() {
-    // document.location.reload(true);
     // if(flag==true)
     // {
 
@@ -81,11 +66,12 @@ function addtodo() {
           data.todo.push(todo1);
           localStorage.setItem('Email', JSON.stringify(Localdata));
           clearList();
-          // document.location.reload();
+          window.location.reload();
           printdata();
  }
-// else{
+//  else{
 //   alert("Please Fill all deatils");
+//  }
 // }
 
 //******************************************************************************PRINTDATA
@@ -112,16 +98,13 @@ function printdata() {
       "<td>" + todolist[i].date1+ "</td>" +
       "<td>" + todolist[i].catogtory + "</td>" +
       "<td>" + todolist[i].status+ "</td>" +
-      "<td>" + "<button type='button' name='' id='btn' onclick='editSave(this.id); editToDo("+i+");'>Edit</button>" + "</td>"
-    document.getElementById("todobody").appendChild(list);
+      "<td>" + '<button type="button" name="" id="btn" onclick="editSave(this.id); editToDo('+i+');">Edit</button>' + "</td>"
+      document.getElementById("todobody").appendChild(list);
   }
 }
-
 //**************************************************************************************DELETEINFO
 function deletetodo()
 {
-
-
   let Userdata = sessionStorage.getItem('Key');
   let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
 
@@ -155,10 +138,10 @@ function deletetodo()
 
     localStorage.setItem('Email', JSON.stringify(Localdata));
   }
+  clearList();
+  printdata();
   document.location.reload(true);
-  
-}
-
+  }
 // ***********************************************************************FILTER
 
 function filter()
@@ -184,53 +167,50 @@ function filter()
 		}
 	}
 	}
-}
+} 
 
 // ************************************************************StatusDone
-function statusDone()
-{
-    var selected = [];
-    var todoselect = document.getElementById("table");
-    var checkBoxes = todoselect.getElementsByTagName('input');
-
-    for (var counter=0; counter<checkBoxes.length; counter++)
-     {
-        if (checkBoxes[counter].checked == true) 
-        {
-          selected.push(counter);
-        }
-    }
-
-    let Userdata = sessionStorage.getItem('Key');
-    let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
-    let toDoData;
-
-    for (let t of Localdata) {
-        if (t.Email == Userdata) {
-            toDoData = t;
-        }
-    }
-
-    var counter =selected.length-1;
-
-    for (var i=toDoData.todo.length-1;i>=0;i--)
-    {
-         if(selected[counter]==i)
-         {
-            toDoData.todo[i].status='Done';
-            localStorage.setItem("Email",JSON.stringify(Localdata));
-            counter--;
-         }
-         printdata();
-         document.location.reload();
-    }  
-}
-
+  function statusDone()
+  {
+      var selected = [];
+      var todoselect = document.getElementById("table");
+      var checkBoxes = todoselect.getElementsByTagName('input');
+  
+      for (var counter=0; counter<checkBoxes.length; counter++)
+       {
+          if (checkBoxes[counter].checked == true) 
+          {
+            selected.push(counter);
+          }
+      }
+  
+      let Userdata = sessionStorage.getItem('Key');
+      let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
+      let toDoData;
+  
+      for (let t of Localdata) {
+          if (t.Email == Userdata) {
+              toDoData = t;
+          }
+      }
+  
+      var counter =selected.length-1;
+  
+      for (var i=toDoData.todo.length-1;i>=0;i--)
+      {
+           if(selected[counter]==i)
+           {
+              toDoData.todo[i].status='Done';
+              localStorage.setItem("Email",JSON.stringify(Localdata));
+              counter--;
+           }
+           clearList();
+           printdata();
+          //  document.location.reload();
+      }  
+  }
 //***********************************************************************************EDIT
-
-function editToDo(index) {
-
-    // printdata();
+function editToDo(i) {
   let Userdata = sessionStorage.getItem('Key');
   let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
 
@@ -240,40 +220,47 @@ function editToDo(index) {
       }
     }
 
-    let v=data.todo;
-    let name=v[index].name;
-    let date=v[index].date;
-    let date1=v[index].date1;
-    let cat=v[index].cat;
-
-    document.getElementById('name').value=name;
-    document.getElementById('date').value=date;
-    document.getElementById('date1').value=date1;
-    // document.querySelector('input[name="cat"]:checked').value=cat;
-
-    v[index].name=document.getElementById('name').value;
-    v[index].date = document.getElementById('date').value;
-    v[index].date1= document.getElementById('date1').value;
-    // let cat1 =  document.querySelector('input[name="cat"]:checked').value;
+    let editItem=data.todo[i];
+    let name=editItem.name;
+    let date=editItem.date;
+    let date1=editItem.date1;
+    // let category=editItem.cat;
     
-    // let todo1 =
-    //   {
-    //       "name": name1,
-    //       "date": date11,
-    //       "date1": date12,
-    //       "catogtory": cat1,
-    //       "status":"Pending",
-    //   }
+    document.getElementById("name").value=name;
+    document.getElementById("date1").value=date;
+    document.getElementById("date1").value=date1;
+    // document.getElementById("cat").value=category;
+    document.getElementById("save").style.display="inline-block";
+    document.getElementById("add").style.display="none";
+    e=i;
+  }
+  function saveChanges()
+  {     
+      let Userdata = sessionStorage.getItem('Key');
+      let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
+  
+        for (let t of Localdata) {
+        if (t.Email == Userdata) {
+          data = t;
+         }
+        }
+  
+      let editItem=data.todo[e];
+  
+       editItem.name=document.getElementById("name").value;
+      editItem.date=document.getElementById("date").value;
+      editItem.date1=document.getElementById("date1").value;
+    // editItem.category=document.getElementById("category").value;
 
-      // v.splice(index,1,todo1);
-      localStorage.setItem('Email',JSON.stringify(Localdata));
-      // clearList();
-      // printdata();
-      // location.location.reload();
+    
+    localStorage.setItem("Email",JSON.stringify(Localdata));
+    // document.getElementById("form").reset();
+        clearList();
+        printdata();
+  
+  }
 
-            
-}
-// **************************************************8*********************///validations for form
+// ***********************************************************************validations for form
 let flag=false;
 function validData()
 {
@@ -295,8 +282,6 @@ function clearList()
 {
   document.getElementById("table").innerHTML="";
 }
-
-// var saveButtton = document.getElementById("editBtn");
 function editSave(index){
     modal.style.display = "block";
 }
