@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/Registration.css">
+        <script src="JSFiles/Registration.js"></script>
+        <title>Registration</title>
+    </head>
+
+        <div class="container">
+            <form>
+                <p class="reg" id="myform">Registration</p>
+                <div class="marginbox">
+                    <label for="firstName">First Name</label>
+                    <label for="lastname" class="lastName">Last Name</label>
+                    <input type="text" id="FirstName" placeholder="First Name" name="fname" onchange="validfname()" style="border:1px solid;">
+                    <input type="text" id="LastName" placeholder="Last Name" name="lname" onchange="validlname()" style="border:1px solid;">
+                    <div id="namef"></div>
+                    <div id="namel"></div>
+
+                    <label for="Email" class="email">Email</label><br>
+                    <input type="text" id="emailbox" placeholder="Enter Email" onchange="mail(this.value)" style="border:1px solid;">
+                    <div id="mail1"></div>
+
+                    <label for="gender" class="gender">Gender</label>
+                    <input type="radio" name="gender"  class="radio1" id="rad1" value="Female">Female
+                    <input type="radio" name="gender"  class="radio1" id="rad2"  value="Male">Male
+                    <input type="radio" name="gender" class="radio1" id="rad3" value="Other">Other<br>
+
+                    <label for="add" class="email">Enter Address</label><br>
+                    <textarea name="address" rows="5" cols="40" id="address" style="border:1px solid;"></textarea>
+
+                    <label for="pass" class="email">Enter Password</label><br>
+                    <input type="password" id="password"  placeholder="Password" onchange="validatepass(this.value)" style="border:1px solid;">
+                    <div id="error"></div> 
+
+                    <label for="pic" class="email">Add Profile Picture</label><br>
+                    <input type="file" accept="image/*" style="margin-top:5px; display: inline-block;" id="inpFile" onchange="UploadProfilePicture(event)">
+                    <div class="image-preview" id="imagePreview">
+                        <img src="./images/profile.png" alt="image Preview" class="image-preview__image" id="viewProfile">
+                        <!-- <span class="image-preview__default-text">Image Preview</span> -->
+                    </div>
+                
+                </div>
+                <button type="button"  onclick="submitRec()">Submit</button>
+                <button type="reset" class="reset" value="Reset">Reset</button>
+            </form>
+        </div>
+    </body>
+</html>
