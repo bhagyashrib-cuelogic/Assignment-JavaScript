@@ -19,15 +19,15 @@
 
         <div id="myModal" class="modal">
           <span class="close">&times;</span>
-          <div class="tab modal-content">
+          <div class="tab modal-content" id="form">
             Name: <br><input type="text" name="Name" id="name"><br>
             Date: <br><input type="date" name="date" id="date"><br>
             Due Date: <br><input type="date" name="dated" id="date1"><br>
             Category:<br><input type="checkbox" name="cat" value="Home" >Home
                       <input type="checkbox" name="cat" value="Study">Study
                       <input type="checkbox" name="cat" value="Work" >Work
-            <button type="button" class="btn" onclick="addtodo();">Add</button>
-            <button type="button"  class="btn" onclick="editToDo()">Edit</button>
+            <button type="button" class="btn" onclick="addtodo();" id="add" style="display: inline-block;">Add</button>
+            <button type="button"  class="btn" onclick="saveChanges();" id="save" style="display: none;">Edit</button>
           </div>
         </div>        
 
