@@ -1,10 +1,8 @@
 
 ( function ()
-{
-    let Userdata = sessionStorage.getItem('Key');
+{    let Userdata = sessionStorage.getItem('Key');
     let Localdata = JSON.parse(localStorage.getItem('Email'));
     let data;
-
 
     for(let t of Localdata)
     {
@@ -14,107 +12,65 @@
             break;
         }
     }
-     
-    let fname = data.Fname;
-    let lname= data.Lname;
-    let email = data.Email;
-    let gender=data.Gender;
-    let add=data.Address;
-    let profile=data.Profile;
 
+    document.getElementById("FNAME").disabled=false;
+    document.getElementById("LNAME").disabled=false;
+    document.getElementById("email").disabled=false;
+    document.getElementById("gender").disabled=false;
+    document.getElementById("add").disabled=false;
+    document.getElementById("viewProfile").disabled=false;
 
-    document.getElementById("FNAME").value=fname;
-    document.getElementById("LNAME").value=lname;
-    document.getElementById("email").value=email;
-    document.getElementById("gender").value=gender;
-    document.getElementById("add").value=add; 
-    document.getElementById("viewProfile").src=data.Profile;;
-
-    
+    document.getElementById("FNAME").value=data.Fname;
+    document.getElementById("LNAME").value=data.Lname;
+    document.getElementById("email").value=data.Email;
+    document.getElementById("gender").value=data.Gender;
+    document.getElementById("add").value=data.Address; 
+    document.getElementById("viewProfile").src=data.Profile;;   
 })();
 
-function  editFname()
-{
-    document.getElementById("FNAME").disabled=false;
-}
-function  editLname()
-{
-    document.getElementById("LNAME").disabled=false;
-}
-function  editemail()
-{
-    document.getElementById("email").disabled=false;
-}
-function  editgender()
-{
-    document.getElementById("gender").disabled=false;
-}
-function  editadd()
-{
-    document.getElementById("add").disabled=false;
-}
-
 //  save edit data
-
-function savedata()
+function saveData()
 {
     let Userdata = sessionStorage.getItem('Key');
-    let Localdata = JSON.parse(localStorage.getItem('Email'));
-    
+let Localdata = JSON.parse(localStorage.getItem('Email'));
+let data;
 
-     let fname= document.getElementById("FNAME").value;
-     let lname=document.getElementById("LNAME").value;
-
-     let email=document.getElementById("email").value
-    //  let pass=document.getElementById("password").value
-
-     let gender=document.getElementById("gender").value;
-
-     let add=document.getElementById("add").value;
-     let todo=[];
-
-    let obj=
+for(let t of Localdata)
+{
+    if(t.Email==Userdata)
     {
-        "Fname":fname,
-        "Lname":lname,
-        "Email":email,
-        // "Pass":pass,
-        "Gender":gender,
-        "Address":add,
-        "todo":todo
-
+        data = t;
+        break;
     }
-      
-    for(let t of Localdata)
-    {
-        if(t.Email==Userdata)
-        {
-            let a=Localdata.indexOf(t);
-            Localdata.splice(a,1,obj)
-            localStorage.setItem('Email',JSON.stringify(Localdata));
-
-            break;
-        }
-    }  
 }
-
-function  editFname1()
-{
     document.getElementById("FNAME").disabled=true;
-}
-function  editLname1()
-{
     document.getElementById("LNAME").disabled=true;
-}
-function  email()
-{
     document.getElementById("email").disabled=true;
-}
-function  editgender1()
-{
     document.getElementById("gender").disabled=true;
-}
-function  editadd1()
-{
     document.getElementById("add").disabled=true;
+    document.getElementById("viewProfile").disabled=true;
+
+    data.Fname= document.getElementById("FNAME").value;
+    data.Lname=document.getElementById("LNAME").value;
+    data.Email=document.getElementById("email").value
+    data.Gender=document.getElementById("gender").value;
+    data.Address=document.getElementById("add").value;
+    data.Profile=sessionStorage.getItem("displayPicture");
+    localStorage.setItem('Email',JSON.stringify(Localdata));
+
+    alert("Save Profile");
+}
+function UploadProfilePicture() 
+{
+    let Image = document.getElementById("inpFile").files[0];
+
+    let imagereader = new FileReader();
+    imagereader.readAsDataURL(Image);
+
+    imagereader.onload = function () 
+    {
+        let imgdata = imagereader.result;
+        sessionStorage.setItem("displayPicture", imgdata);
+        document.getElementById("viewProfile").src = imgdata;
+    };
 }

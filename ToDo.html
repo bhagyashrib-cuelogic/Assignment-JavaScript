@@ -7,28 +7,33 @@
     <title>ToDo App</title>
   </head>
 
-  <body onload="printdata();">
-    <div class="container">
-      <header>
-        <div class="leftdiv">
-          <div class="list">
-            <a href="#" class="Profile" onclick="redirect();">Profile</a>
-            <a href="#" class="Profile" onclick="logoutUser();">Logout</a>
-          </div>
+    <header>
+      <span>ToDO APP</span>
+      <div class="leftdiv">
+        <button type="button" id="addButtton" class="Profile" style="background: #563D7C;">ADD</button> 
+        <div class="list">
+          <a href="#" class="Profile" onclick="redirect();">Profile</a>
+          <a href="#" class="Profile" onclick="logoutUser();">Logout</a>
         </div>
+      </div>
+    </header>
 
+
+
+  <body onload="printData();">
+    <div class="container" id="todoData">
         <div id="myModal" class="modal">
           <span class="close">&times;</span>
-          <div class="tab modal-content" id="form">
-            Name: <br><input type="text" name="Name" id="name"><br>
+          <form class="tab modal-content" id="form">
+            Name: <br><input type="text" name="Name" id="title"><br>
             Date: <br><input type="date" name="date" id="date"><br>
-            Due Date: <br><input type="date" name="dated" id="date1"><br>
+            Due Date: <br><input type="date" name="dated" id="due"><br>
             Category:<br><input type="checkbox" name="cat" value="Home" >Home
                       <input type="checkbox" name="cat" value="Study">Study
                       <input type="checkbox" name="cat" value="Work" >Work
-            <button type="button" class="btn" onclick="addtodo();" id="add" style="display: inline-block;">Add</button>
+            <button type="button" class="btn" onclick="addTodo();" id="add" style="display: inline-block;">Add</button>
             <button type="button"  class="btn" onclick="saveChanges();" id="save" style="display: none;">Edit</button>
-          </div>
+          </form>
         </div>        
 
        
@@ -37,10 +42,10 @@
 
       <div class="rightdiv">
         <div class="list">
-          <button type="button" id="addButtton" class="Profile" style="background: #563D7C;">ADD</button> 
-          <button type="button" id="deleteButton" class="Profile" onclick="deletetodo();">Delete</button>
+          <!-- <button type="button" id="addButtton" class="Profile" style="background: #563D7C;">ADD</button>  -->
+          <button type="button" id="deleteButton" class="Profile" onclick="deleteTodo();">Delete</button>
           <select id="search" onchange="filter();">
-            <option value="All" selected reqquired>All</option>
+            <option value="All" selected reqquired onchange="filter();">All</option>
             <option value="Home">Home</option>
             <option value="Study">Study</option>
             <option value="Work">Work</option>
@@ -63,9 +68,9 @@
           </tr>
           <tbody id="todobody"></tbody>
         </table>
+        <br>
       </div>    
     </div>   
-
     <script src="JSFiles/ToDo.js"></script>
   </body>
 

@@ -6,10 +6,6 @@ function LoginUser() {
     var test = JSON.parse(localStorage.getItem('Email'));
 
     for (var i of test) {
-        if(i==test.length)
-            {
-                 alert('User not found');
-            }
         if (loginId != "") {
             if (loginId == i.Email) 
             {

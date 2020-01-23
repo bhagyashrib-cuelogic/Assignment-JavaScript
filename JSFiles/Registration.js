@@ -35,7 +35,6 @@ function submitRec()
             };
            
             ValidateUser(obj);
-            
 }
 else{
     alert("Please Enter all details");
@@ -52,7 +51,7 @@ function ValidateUser(obj)
         {
             if(existing[i].Email== obj.Email)
             {
-                flag = true;
+                flag = true;                         
                 alert("sorry email exist..!");
                 break;
             }
@@ -76,14 +75,13 @@ function validatepass(password)
 
     if(password.length<8 || password=="")
     {
-        console.log("wrong pass");
-        document.getElementById("error").innerHTML="Enter valid password";
+        document.getElementById("error").innerHTML="Password length is too short";
         document.getElementById("error").style.color="red";
     }
     else
     {
-        console.log("strong");
          pass1 = true;
+         document.getElementById("error").style.display="none";
     }
 }
 
@@ -100,42 +98,45 @@ function validfname()
             // console.log("Please Enter valid Name");
             document.getElementById("namef").innerHTML="cant' Empty";
             document.getElementById("namef").style.color="red";
+            document.getElementById("namef").style.visibility="visible";
         }
 
         else if(!(Fname.match(letters)))
         {
-            console.log("Please Enter valid Name");
             document.getElementById("namef").innerHTML="Please Enter valid First name";
             document.getElementById("namef").style.color="red";
+            document.getElementById("namef").style.visibility="visible";
         }
         else{
              first=true;
+             document.getElementById("namef").style.visibility="hidden";
         }
 }
 
 // last name validation
 function validlname()
 {
-    check
         let Lname=document.getElementById("LastName").value;
         lastName = false;
 
-    var letters = /^[A-Za-z]+$/;
+    var letters = /^[A-Za-z]+$/;    
 
     if(Lname=="" || Lname==null)
         {
             document.getElementById("namel").innerHTML="cant' Empty";
             document.getElementById("namel").style.color="red";
+            document.getElementById("namel").style.visibility="visible";
         }
 
     else if(!(Lname.match(letters)))
         {
-            console.log("Please Enter valid Name");
             document.getElementById("namel").innerHTML="Please Enter valid  Last name";
             document.getElementById("namel").style.color="red";
+            document.getElementById("namel").style.visibility="visible";
         }
         else{
-            lastName = true;
+                document.getElementById("namel").style.visibility="hidden";
+                lastName = true;
         }
 }
 
@@ -143,17 +144,19 @@ function validlname()
 
 function mail(maill)
 {
-    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    // let maill=document.getElementById("emailbox").value;
+    var filter = /^[a-zA-z0-9._]{5,10}@[gmail.]{5,6}[.][a-z.]{3,6}$/;
     Mail=false;
     if(!(maill.match(filter)) || maill==null || maill =="")
     {
-        console.log("Please Enter valid Name");
         document.getElementById("mail1").innerHTML="Please Enter your valid mail";
         document.getElementById("mail1").style.color="red";
+        document.getElementById("mail1").style.visibility="visible";
     }
     else
     {
         Mail=true;
+        document.getElementById("mail1").style.visibility="hidden";
     }
 }
 

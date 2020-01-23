@@ -1,15 +1,56 @@
 *{ box-sizing: border-box; }
-body{ background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%); }
+header{
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding-top: 5px;
+    display:inline-block;
+    background-color: #563D7C;
+}
 .container{
     width:600px;
     margin: auto;
-    margin-top:25px;
     background-color: #EDEDED;
     border-radius: 5px;
     padding:24px;
     padding-right:2px;
+    margin-top:60px;
 }
-
+.leftDiv
+{
+    padding: 10px;
+    border: 5px;
+    color: white;
+    text-align: center;
+    margin-left:350px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top:7px;
+}
+.leftDiv
+{
+    padding: 10px;
+    border: 5px;
+    color: white;
+    text-align: center;
+    margin-left:350px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top:7px;
+}
+.signUp
+{
+    padding: 10px;
+    border: 5px;
+    color: white;
+    text-align: center;
+    float: right;
+    margin-right:390px;
+    vertical-align: middle;
+    margin-top:7px;
+}
 .reg{
     text-align: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -141,4 +182,8 @@ button:hover{ background-color:#563D7C; }
     /* display: none; */
     width:100px;
     height:50px;
+}
+.field
+{
+    color: red;
 }

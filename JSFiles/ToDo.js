@@ -1,4 +1,41 @@
-let e=0;
+// *********************************************************************************Add function
+
+let Userdata = sessionStorage.getItem('Key');
+let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
+let data;
+
+for (let t of Localdata) {
+  if (t.Email == Userdata) {
+    data = t;
+  }
+}
+noData();
+// ************************************************************************************ClearFunction
+function clearList() {
+  document.getElementById("todobody").innerHTML = "";
+}
+clearList();
+printData();
+// ***************************************************************************************
+function init() {
+  let name = document.getElementById("title").value;
+  let date = document.getElementById("date").value;
+  let date1 = document.getElementById("due").value;
+  let cat = document.querySelector('input[name="cat"]:checked').value;
+  let random = Math.random();
+  todo =
+  {
+    "name": name,
+    "date": date,
+    "date1": date1,
+    "catogtory": cat,
+    "status": "Pending",
+    "todoid": random
+  }
+}
+// *************************************************************************************table
+      var todoselect = document.getElementById("table");
+      var checkBoxes = todoselect.getElementsByTagName('input');
 //*********************************************************************************REDIRECT
 function redirect() {
   window.location.href = "./Profile.html";
@@ -19,7 +56,11 @@ var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 
 addButtton.onclick = function () {
-      modal.style.display = "block";
+  document.getElementById("todoData").style.display="";
+  modal.style.display = "block";
+  document.getElementById("form").reset();
+  document.getElementById("add").style.display="inline-block";
+  document.getElementById("save").style.display="none";
 }
 
 span.onclick = function () {
@@ -31,119 +72,150 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 }
+function editSave(index) {
+  modal.style.display = "block";
+}
 
 
-
-//**********************************************************************************ADDTODO
-function addtodo() {
-    // if(flag==true)
-    // {
-
-      let name = document.getElementById("name").value;
-      let date = document.getElementById("date").value;
-      let date1 = document.getElementById("date1").value;
-      let cat =  document.querySelector('input[name="cat"]:checked').value;
-      let random = Math.random();
-      let todo1 =
-      {
-          "name": name,
-          "date": date,
-          "date1": date1,
-          "catogtory": cat,
-          "status":"Pending",   
-          "todoid":random
-      }
-
-           let Userdata = sessionStorage.getItem('Key');
-          let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
-          let data;
-
-            for (let t of Localdata) {
-          if (t.Email == Userdata) {
-                data = t;
-              }
-             }
-          data.todo.push(todo1);
-          localStorage.setItem('Email', JSON.stringify(Localdata));
-          clearList();
-          window.location.reload();
-          printdata();
- }
-//  else{
-//   alert("Please Fill all deatils");
-//  }
-// }
-
-//******************************************************************************PRINTDATA
-function printdata() {
-
-  let Userdata = sessionStorage.getItem('Key');
-  let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
-  let data;
-
-    for (let t of Localdata) {
-  if (t.Email == Userdata) {
-        data = t;
-      }
-     }
-
+// ************************************************************************************addTodo
+function addTodo() {
+  init();
+  data.todo.push(todo);
+  localStorage.setItem('Email', JSON.stringify(Localdata));
+  validData();
+  clearList();
+  dateValidation();
+  printData();
+  document.getElementById("form").reset();
+}
+// ******************************************************************************printTodo
+function printData() {
+  clearList();
   let todolist = data.todo;
+  let table = document.getElementById("todobody");
 
   for (let i = 0; i < todolist.length; i++) {
 
-    let list=document.createElement("tr");
+    let list = document.createElement("tr");
     list.innerHTML = "<td>" + "<input name='selectedItem' type='checkbox' value='yes' id='checkbox-" + todolist[i].todoid + "' </td>" +
       "<td>" + todolist[i].name + "</td>" +
       "<td>" + todolist[i].date + "</td>" +
-      "<td>" + todolist[i].date1+ "</td>" +
+      "<td>" + todolist[i].date1 + "</td>" +
       "<td>" + todolist[i].catogtory + "</td>" +
-      "<td>" + todolist[i].status+ "</td>" +
-      "<td>" + '<button type="button" name="" id="btn" onclick="editSave(this.id); editToDo('+i+');">Edit</button>' + "</td>"
-      document.getElementById("todobody").appendChild(list);
+      "<td>" + todolist[i].status + "</td>" +
+      "<td>" + '<button type="button" name="" id="btn" onclick="editSave(this.id); editToDo('+i+'); disableDone('+i+');">Edit</button>' + "</td>"
+    table.appendChild(list);
   }
 }
-//**************************************************************************************DELETEINFO
-function deletetodo()
-{
-  let Userdata = sessionStorage.getItem('Key');
-  let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
+// ***************************************************************************delteTodo
+function deleteTodo() {
 
-    for (let t of Localdata) {
-      if (t.Email == Userdata) {
-        data = t;
-      }
-     }
+  document.getElementById("title").value = "";
+  document.getElementById("date").value = "";
+  document.getElementById("due").value = "";
 
-    document.getElementById("name").value = "";
-    document.getElementById("date").value = "";
-    document.getElementById("date1").value = "";
-    var selected = [];
-    var todoselect = document.getElementById("table");
-    var checkBoxes = todoselect.getElementsByTagName('input');
-
-    for (var counter=0; counter<checkBoxes.length; counter++) {
-      if (checkBoxes[counter].checked == true) {
-      selected.push(counter);
-     }
+  for (var t = data.todo.length - 1; t >= 0; t--) {
+    if (checkBoxes[t].checked == true) {
+      table.deleteRow(t + 1);
+      data.todo.splice(t, 1);
+      alert("Deleted ToDo");
     }
-  
-  var counter =selected.length-1;
-
-  for (var t=data.todo.length-1;t>=0;t--){
-    if(selected[counter]==t){
-      table.deleteRow(t+1);
-      data.todo.splice(t,1);
-      counter--;
+  }
+  localStorage.setItem('Email', JSON.stringify(Localdata));
+  clearList();
+  printData();
+  noData();
+}
+// ********************************************************************************statusDone
+function statusDone() {
+  for (var t = data.todo.length - 1; t >= 0; t--) {
+    if (checkBoxes[t].checked == true) {
+      data.todo[t].status = 'Done';
+      localStorage.setItem("Email", JSON.stringify(Localdata));
     }
-
-    localStorage.setItem('Email', JSON.stringify(Localdata));
   }
   clearList();
-  printdata();
-  document.location.reload(true);
-  }
-// ***********************************************************************FILTER
+  printData();
+}
+// **********************************************************************************editToDo
+function editToDo(i) {
+    let editItem=data.todo[i];
+    let name=editItem.name;
+    let date=editItem.date;
+    let date1=editItem.date1; 
+    let cat=editItem.catogtory;
 
+    document.getElementById("title").value=name;
+    document.getElementById("date").value=date;
+    document.getElementById("due").value=date1;
+    document.querySelector('input[name="cat"]').value=cat;
+    document.getElementById("add").style.display="none";
+    document.getElementById("save").style.display="inline-block";
+    e=i;
+  }
+// ****************************************************************************************SaveChnages
+  function saveChanges()
+  {   let editItem=data.todo[e];
+      editItem.name=document.getElementById("title").value;
+      editItem.date=document.getElementById("date").value;
+      editItem.date1=document.getElementById("due").value;
+      // editItem.category=document.querySelector('input[name="ca"]:checked').value;
+      dateValidation();
+      localStorage.setItem("Email",JSON.stringify(Localdata));
+        validData();
+        clearList();
+        printData();
+        document.getElementById("form").reset();
+ }
+// ******************************************************************************date Validation
+ function dateValidation()
+{
+    let date = document.getElementById("date").value;
+    let date1 = document.getElementById("due").value;
+    if(date>date1)
+    {
+        alert("Date is greater than due date");
+    }
+}
+
+function validData()
+{
+  let name = document.getElementById("title").value;
+  let date = document.getElementById("date").value;
+  let date1 = document.getElementById("due").value;
+  // let cat = document.querySelector('input[name="cat"]:checked').value;
+
+  if(name=="" || date=="" || date1=="")
+  {
+     alert("Please fill all the deatils");
+  }
+}
+
+// **************************************************************disableDone
+function disableDone(i)
+{
+  let doneTodo=data.todo[i];
+  if(doneTodo.status=="Done")
+  {
+        this.disabled="true";
+        modal.style.display = "none";
+        alert("you are done");
+  }
+}
+
+// ************************************************************************noData
+function noData()
+{
+    if (data.todo=="")
+    {
+        document.getElementById("todoData").style.display="none";
+        alert("No record Found");
+    }
+    else{
+      document.getElementById("todoData").style.display="";
+    }
+}
+//*****************************************************************************************Filter */
 function filter()
 {
 	var search = document.getElementById("search").value;
@@ -151,7 +223,7 @@ function filter()
 
 	let tr = table.getElementsByTagName('tr');
 
-	for(var i=0;i<tr.length;i++)
+	for(var i=1;i<tr.length;i++)
 	{
 		let td = tr[i].getElementsByTagName('td')[4];
 	if(td)
@@ -159,129 +231,16 @@ function filter()
 		let text = td.innerHTML;
 		if(text.match(search))
 		{
-			tr[1].style.display ="";
-		}
+      tr[i].style.display ="";
+    }
+     else if(search=="All")
+      {
+        tr[i].style.display ="";
+      }
 		else
 		{
 			tr[i].style.display="none";
 		}
 	}
 	}
-} 
-
-// ************************************************************StatusDone
-  function statusDone()
-  {
-      var selected = [];
-      var todoselect = document.getElementById("table");
-      var checkBoxes = todoselect.getElementsByTagName('input');
-  
-      for (var counter=0; counter<checkBoxes.length; counter++)
-       {
-          if (checkBoxes[counter].checked == true) 
-          {
-            selected.push(counter);
-          }
-      }
-  
-      let Userdata = sessionStorage.getItem('Key');
-      let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
-      let toDoData;
-  
-      for (let t of Localdata) {
-          if (t.Email == Userdata) {
-              toDoData = t;
-          }
-      }
-  
-      var counter =selected.length-1;
-  
-      for (var i=toDoData.todo.length-1;i>=0;i--)
-      {
-           if(selected[counter]==i)
-           {
-              toDoData.todo[i].status='Done';
-              localStorage.setItem("Email",JSON.stringify(Localdata));
-              counter--;
-           }
-           clearList();
-           printdata();
-          //  document.location.reload();
-      }  
-  }
-//***********************************************************************************EDIT
-function editToDo(i) {
-  let Userdata = sessionStorage.getItem('Key');
-  let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
-
-    for (let t of Localdata) {
-      if (t.Email == Userdata) {
-        data = t;
-      }
-    }
-
-    let editItem=data.todo[i];
-    let name=editItem.name;
-    let date=editItem.date;
-    let date1=editItem.date1;
-    // let category=editItem.cat;
-    
-    document.getElementById("name").value=name;
-    document.getElementById("date1").value=date;
-    document.getElementById("date1").value=date1;
-    // document.getElementById("cat").value=category;
-    document.getElementById("save").style.display="inline-block";
-    document.getElementById("add").style.display="none";
-    e=i;
-  }
-  function saveChanges()
-  {     
-      let Userdata = sessionStorage.getItem('Key');
-      let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
-  
-        for (let t of Localdata) {
-        if (t.Email == Userdata) {
-          data = t;
-         }
-        }
-  
-      let editItem=data.todo[e];
-  
-       editItem.name=document.getElementById("name").value;
-      editItem.date=document.getElementById("date").value;
-      editItem.date1=document.getElementById("date1").value;
-    // editItem.category=document.getElementById("category").value;
-
-    
-    localStorage.setItem("Email",JSON.stringify(Localdata));
-    // document.getElementById("form").reset();
-        clearList();
-        printdata();
-  
-  }
-
-// ***********************************************************************validations for form
-let flag=false;
-function validData()
-{
-  let name = document.getElementById("name").value;
-  let date = document.getElementById("date").value;
-  let date1 = document.getElementById("date1").value;
-  let cat =  document.querySelector('input[name="cat"]:checked').value;
-
-  if(name=="" || date=="" || date1=="")
-  {
-     flag=false;
-  }
-  else{
-    flag=true;
-  }
-}
-//******************************************************************************clear */
-function clearList()
-{
-  document.getElementById("table").innerHTML="";
-}
-function editSave(index){
-    modal.style.display = "block";
 }
