@@ -20,7 +20,6 @@
 .input1{
 
     max-width: 70px;
-    background-color:cornflowerblue;
     text-align: right;
     color:black;
     margin-top:5px;
@@ -28,11 +27,12 @@
     border: none;
     cursor: pointer;
     border:0px solid;
+    background-color:#EDEDED;
 }
 .input2
 {
     max-width: 60px;
-    background-color:cornflowerblue;
+    background-color:#EDEDED;
     text-align: center;
     color:black;
     margin-top:5px;
@@ -64,14 +64,14 @@ button
     border: none;
     cursor: pointer;
     text-align:center;
-    background-color: cornflowerblue;
+    background-color: #EDEDED;
 }
 .gender
 {
     width:50px;
     margin-left: 120px;
     margin-top:5px;
-    background-color: cornflowerblue;
+    background-color: #EDEDED;
     border: 0px solid;
     color: black;
 }
@@ -83,20 +83,17 @@ button
     border: 0px solid;
     color: black;
     text-align: center;
-    background-color: cornflowerblue;
+    background-color:#EDEDED;
 }
 .image-preview
 {
     width:350px;
-    /* height: 70px;s */
-    /* border: 1px solid #dddddd; */
     margin-top:-35px;
     display: flex;
     align-items: center;
 }
 .image-preview__image
 {
-    /* display: none; */
     width:350px;
     height:100px;
     margin-left: -25px;

@@ -16,16 +16,29 @@
     document.getElementById("FNAME").disabled=false;
     document.getElementById("LNAME").disabled=false;
     document.getElementById("email").disabled=false;
-    document.getElementById("gender").disabled=false;
     document.getElementById("add").disabled=false;
     document.getElementById("viewProfile").disabled=false;
 
     document.getElementById("FNAME").value=data.Fname;
     document.getElementById("LNAME").value=data.Lname;
     document.getElementById("email").value=data.Email;
-    document.getElementById("gender").value=data.Gender;
     document.getElementById("add").value=data.Address; 
     document.getElementById("viewProfile").src=data.Profile;;   
+
+    let gen = data.Gender;
+    if(gen=="Female")
+    {
+        document.getElementsByName("gender")[0].checked=true;
+      } 
+     else if(gen=="Male")
+     {
+      document.getElementsByName("gender")[1].checked=true;
+     }
+     else if(gen=="Other")
+     {
+      document.getElementsByName("gender")[2].checked=true;
+     }
+
 })();
 
 //  save edit data
@@ -46,14 +59,13 @@ for(let t of Localdata)
     document.getElementById("FNAME").disabled=true;
     document.getElementById("LNAME").disabled=true;
     document.getElementById("email").disabled=true;
-    document.getElementById("gender").disabled=true;
     document.getElementById("add").disabled=true;
     document.getElementById("viewProfile").disabled=true;
 
     data.Fname= document.getElementById("FNAME").value;
     data.Lname=document.getElementById("LNAME").value;
     data.Email=document.getElementById("email").value
-    data.Gender=document.getElementById("gender").value;
+    data.Gender=document.querySelector('input[name="gender"]:checked').value;
     data.Address=document.getElementById("add").value;
     data.Profile=sessionStorage.getItem("displayPicture");
     localStorage.setItem('Email',JSON.stringify(Localdata));

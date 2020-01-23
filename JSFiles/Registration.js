@@ -15,7 +15,19 @@ function submitRec()
    let email=document.getElementById("emailbox").value
    let pass=document.getElementById("password").value
 
-   let gender=document.querySelector('input[name="gender"]:checked').value;
+   let gender=document.querySelectorAll('input[name="gender"]');
+   if(gender=="Female")
+   {
+    document.getElementsByName("gender")[0].checked=true;
+   }
+  else if(gender=="Male")
+   {
+    document.getElementsByName("gender")[1].checked=true;
+   }
+   else if(gender=="Other")
+   {
+     document.getElementsByName("gender")[2].checked=true;
+   }
 
    let add=document.getElementById("address").value;
     var profile= sessionStorage.getItem("displayPicture");
