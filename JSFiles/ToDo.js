@@ -63,7 +63,7 @@ function logoutUser() {
     window.location.href = "./ToDo.html"
   }
 }
-// **************For pop form***************************************************//
+// **************For pop up form and data enter form***************************************************//
 var addButtton = document.getElementById("addButtton");
 var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
