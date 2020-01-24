@@ -1,10 +1,10 @@
-// for getting elements from form
+// ********************************************************************falg
  let check=false;
 let pass1 = false;
 let first = false;
 let lastName = false;
 let Mail = false;
-
+// ***********************************************************************submitRec
 function submitRec()
 {
     if(pass1==true && first==true && lastName==true && Mail==true)
@@ -15,44 +15,37 @@ function submitRec()
    let email=document.getElementById("emailbox").value
    let pass=document.getElementById("password").value
 
-   let gender=document.querySelectorAll('input[name="gender"]');
-   if(gender=="Female")
-   {
-    document.getElementsByName("gender")[0].checked=true;
-   }
-  else if(gender=="Male")
-   {
-    document.getElementsByName("gender")[1].checked=true;
-   }
-   else if(gender=="Other")
-   {
-     document.getElementsByName("gender")[2].checked=true;
-   }
+   let Gender=document.querySelectorAll('input[name="gender"]');
+   let gen;
+   for(let i=0;i<Gender.length;i++)
+  {
+    if(Gender[i].checked==true)
+    {
+        gen=Gender[i].value;
+    }
 
-   let add=document.getElementById("address").value;
+  }
+    let add=document.getElementById("address").value;
     var profile= sessionStorage.getItem("displayPicture");
     let todo=[];
-
-
-      
     let obj= {
                 "Fname":fname ,
                 "Lname":lname,
                 "Email":email,
                 "Pass":pass,
-                "Gender":gender,
+                "Gender":gen,
                 "Address":add,
                 "todo":todo,
                 "Profile":profile
             };
-           
-            ValidateUser(obj);
+            validateUser(obj);
 }
 else{
     alert("Please Enter all details");
+    }
 }
-}
-function ValidateUser(obj)
+// ********************************************************************validateUser
+function validateUser(obj)
 {
     let existing = JSON.parse(localStorage.getItem('Email')) || [];
     let flag = false;
@@ -77,14 +70,12 @@ function ValidateUser(obj)
         existing.push(obj);
         localStorage.setItem('Email',JSON.stringify(existing));
         redirect();
-    }
-           
+    }         
 }
-
+// ********************************************************************************validpassword
 function validatepass(password)
 {
     pass1=false;
-
     if(password.length<8 || password=="")
     {
         document.getElementById("error").innerHTML="Password length is too short";
@@ -96,10 +87,7 @@ function validatepass(password)
          document.getElementById("error").style.display="none";
     }
 }
-
-
-// First Name Validdation
-
+// ******************************************************************validFirst Name
 function validfname()
 {
     first = false;
@@ -107,12 +95,10 @@ function validfname()
     var letters = /^[A-Za-z]+$/;
     if(Fname=="" || Fname==null)
         {
-            // console.log("Please Enter valid Name");
             document.getElementById("namef").innerHTML="cant' Empty";
             document.getElementById("namef").style.color="red";
             document.getElementById("namef").style.visibility="visible";
         }
-
         else if(!(Fname.match(letters)))
         {
             document.getElementById("namef").innerHTML="Please Enter valid First name";
@@ -124,39 +110,33 @@ function validfname()
              document.getElementById("namef").style.visibility="hidden";
         }
 }
-
-// last name validation
+// ******************************************************************validLastName
 function validlname()
 {
         let Lname=document.getElementById("LastName").value;
         lastName = false;
-
-    var letters = /^[A-Za-z]+$/;    
-
-    if(Lname=="" || Lname==null)
-        {
+        var letters = /^[A-Za-z]+$/;    
+        if(Lname=="" || Lname==null)
+            {
             document.getElementById("namel").innerHTML="cant' Empty";
             document.getElementById("namel").style.color="red";
             document.getElementById("namel").style.visibility="visible";
-        }
+            }
 
-    else if(!(Lname.match(letters)))
-        {
+         else if(!(Lname.match(letters)))
+            {
             document.getElementById("namel").innerHTML="Please Enter valid  Last name";
             document.getElementById("namel").style.color="red";
             document.getElementById("namel").style.visibility="visible";
-        }
+            }
         else{
                 document.getElementById("namel").style.visibility="hidden";
                 lastName = true;
-        }
+            }
 }
-
-// mail validation
-
+// ***************************************************************validMail
 function mail(maill)
 {
-    // let maill=document.getElementById("emailbox").value;
     var filter = /^[a-zA-z0-9._]{5,10}@[gmail.]{5,6}[.][a-z.]{3,6}$/;
     Mail=false;
     if(!(maill.match(filter)) || maill==null || maill =="")
@@ -171,12 +151,11 @@ function mail(maill)
         document.getElementById("mail1").style.visibility="hidden";
     }
 }
-
+// *************************************************************************redirect
 function redirect()
 {
     window.location.href="./Login.html";
 }
-
 function UploadProfilePicture() 
 {
     let Image = document.getElementById("inpFile").files[0];
@@ -191,3 +170,4 @@ function UploadProfilePicture()
         document.getElementById("viewProfile").src = imgdata;
     };
 }
+// ***************************************************************************end

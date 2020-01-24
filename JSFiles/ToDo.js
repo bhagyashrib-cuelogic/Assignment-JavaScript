@@ -1,9 +1,7 @@
-// *********************************************************************************Add function
-
+// *********************************************************************************Global Decalration
 let Userdata = sessionStorage.getItem('Key');
 let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
 let data;
-
 for (let t of Localdata) {
   if (t.Email == Userdata) {
     data = t;
@@ -19,10 +17,9 @@ function clearList() {
 }
 clearList();
 printData();
-// ***************************************************************************************
+// ***************************************************************************************init
 function init() {
   let cat;
-  let cat1;
   let name = document.getElementById("title").value;
   let date = document.getElementById("date").value;
   let date1 = document.getElementById("due").value;
@@ -42,7 +39,6 @@ function init() {
     "date": date,
     "date1": date1,
     "catogtory": cat,
-    "cat1":cat1,
     "status": "Pending",
     "todoid": random
   }
@@ -66,7 +62,7 @@ function logoutUser() {
     window.location.href = "./ToDo.html"
   }
 }
-
+// *********************************************************************************Global Decalration
 var addButtton = document.getElementById("addButtton");
 var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
@@ -88,11 +84,9 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 }
-function editSave(index) {
+function editSave() {
   modal.style.display = "block";
 }
-
-
 // ************************************************************************************addTodo
 function addTodo() {
   init();
@@ -113,20 +107,19 @@ function printData() {
   let table = document.getElementById("todobody");
 
   for (let i = 0; i < todolist.length; i++) {
-
-    let list = document.createElement("tr");
-    list.innerHTML = "<td>" + "<input name='selectedItem' type='checkbox' value='yes' id='checkbox-" + todolist[i].todoid + "' </td>" +
+    let list= document.createElement("tr");
+  list.innerHTML= "<td>" + "<input name='selectedItem' type='checkbox' value='yes' id='checkbox-" + todolist[i].todoid + "' </td>" +
       "<td>" + todolist[i].name + "</td>" +
       "<td>" + todolist[i].date + "</td>" +
       "<td>" + todolist[i].date1 + "</td>" +
       "<td>" + todolist[i].catogtory + "</td>" +
       "<td>" + todolist[i].status + "</td>" +
-      "<td>" + '<button type="button" style="display:block" name="" id="btn'+i+'" onclick="editSave(this.id); editToDo('+i+'); disableDone('+i+');">Edit</button>' + "</td>"
-    table.appendChild(list);
-    if(todolist[i].status=="Done")
-        {
-            document.getElementById("btn"+i).innerText="Delete";
-        }
+     "<td>" + '<button type="button" style="display:block" name="" id="btn'+i+'" onclick="editSave(this.id); editToDo('+i+'); disableDone('+i+');">Edit</button>' + "</td>";
+      table.appendChild(list);
+    // if(todolist[i].status=="Done")
+    //     {
+    //         document.getElementById("btn"+i).innerText="Delete";
+    //     }
   }
 }
 // ***************************************************************************delteTodo
@@ -161,11 +154,11 @@ function statusDone() {
 }
 // **********************************************************************************editToDo
 function editToDo(i) {
-    let editItem=data.todo[i];
-    let name=editItem.name;
-    let date=editItem.date;
-    let date1=editItem.date1; 
-    let cat=editItem.catogtory;
+    let editData=data.todo[i];
+    let name=editData.name;
+    let date=editData.date;
+    let date1=editData.date1; 
+    let cat=editData.catogtory;
 
     document.getElementById("title").value=name;
     document.getElementById("date").value=date;
@@ -189,26 +182,34 @@ function editToDo(i) {
   }
 // ****************************************************************************************SaveChnages
   function saveChanges()
-  {   let editItem=data.todo[e];
-      editItem.name=document.getElementById("title").value;
-      editItem.date=document.getElementById("date").value;
-      editItem.date1=document.getElementById("due").value;
-      let cat=document.querySelector('input[name="cat"]');
-    if(cat=="Home")
-   {
-    document.getElementsByName("cat")[0].checked=true;
-   }
-  else if(cat="Study")
-   {
-    document.getElementsByName("cat")[1].checked=true;
-   }
-   else if(gender=="Work")
-   {
-     document.getElementsByName("Work")[2].checked=true;
-   }
-   editItem.categor=cat;
-
-      dateValidation();
+  {   let editData=data.todo[e];
+      editData.name=document.getElementById("title").value;
+      editData.date=document.getElementById("date").value;
+      editData.date1=document.getElementById("due").value;
+      let cat1=document.querySelectorAll('input[name="cat"]');
+      let cat;
+        for(let i=0;i<cat1.length;i++)
+        {
+          if(cat1[i].checked==true)
+          {
+             cat=cat1[i].value;
+          }
+        }
+        if(cat=="Home")
+        {
+          document.getElementsByName("cat")==true;
+        }
+        else if (cat=="Study")
+        {
+          document.getElementsByName("cat")==true;
+        }
+        else if(cat=="Work")
+        {
+          document.getElementsByName("cat")==true;
+        }
+        editData.catogtory=cat;
+        dateValidation();
+        localStorage.setItem("Email",JSON.stringify(Localdata));
         printData();
         document.getElementById("form").reset();
  }
@@ -226,13 +227,12 @@ function editToDo(i) {
       todoDate=true;
     }
 }
-
+// ***************************************************************************validData
 function validData()
 {                                                                          
   let name = document.getElementById("title").value;
   let date = document.getElementById("date").value;
   let date1 = document.getElementById("due").value;
-
   if(name=="" || date=="" || date1=="")
   {
      alert("Please fill all the deatils");
@@ -242,7 +242,6 @@ function validData()
     todoData=true;
   }
 }
-
 // **************************************************************disableDone
 function disableDone(i)
 {
@@ -255,14 +254,13 @@ function disableDone(i)
         alert("you are done");
   }
 }
-
 // ************************************************************************noData
 function noData()
 {
     if (data.todo=="")
     {
+        // alert("No record Found");
         document.getElementById("todoData").style.display="none";
-        alert("No record Found");
     }
     else{
       document.getElementById("todoData").style.display="";
@@ -273,9 +271,7 @@ function filter()
 {
 	var search = document.getElementById("search").value;
 	let table = document.getElementById("table");
-
 	let tr = table.getElementsByTagName('tr');
-
 	for(var i=1;i<tr.length;i++)
 	{
 		let td = tr[i].getElementsByTagName('td')[4];
@@ -297,10 +293,11 @@ function filter()
 	}
 	}
 }
-
-// function deleteDoto(i)
-// {
-//   table.deleteRow(i+1);
-//   data.todo.splice(i,1);
-//   printData();
-// }
+// *********************************************************************deleteToDo
+function deleteDoto(i)
+{
+  table.deleteRow(i+1);
+  data.todo.splice(i,1);
+  printData();
+}
+// **********************************************************************************
