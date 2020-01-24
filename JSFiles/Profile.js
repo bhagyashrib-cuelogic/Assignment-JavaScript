@@ -1,6 +1,7 @@
 // ****************************************************************IIFY Function
 ( function ()
-{    let Userdata = sessionStorage.getItem('Key');
+{
+    let Userdata = sessionStorage.getItem('Key');
     let Localdata = JSON.parse(localStorage.getItem('Email'));
     let data;
 

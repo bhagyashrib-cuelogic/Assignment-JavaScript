@@ -1,4 +1,18 @@
-// ****************************************************loginUser
+// *********valid user login ***************************//
+( function ()
+{
+  let Userdata = sessionStorage.getItem('Key');
+  let Localdata = JSON.parse(localStorage.getItem('Email')) || [];
+  for (let t of Localdata) {
+    if (t.Email!=Userdata || Userdata=="" || t.Email=="") {
+      window.location.href="./index.html";
+    }
+  }
+  if(Userdata=="")
+  {
+      location.window.href="./index.html";
+  }
+});
 function LoginUser() {
     let loginId = document.getElementById("loginid").value;
     let password = document.getElementById("passUser").value;
@@ -22,7 +36,7 @@ function LoginUser() {
                         {
                             alert("Login Successfully");
                             sessionStorage.setItem('Key',loginId);
-                            redirect();
+                            window.location.href = "./ToDo.html";
                         }
                         else    {  
                             document.getElementById("login").innerHTML = "Password is wrong";
@@ -44,8 +58,7 @@ function LoginUser() {
                 {
                     document.getElementById("loginpass").innerHTML = "Enter Email";
                     document.getElementById("loginpass").style.color = "red";
-                }
-            
+                }   
          }
     }
         else
@@ -54,11 +67,7 @@ function LoginUser() {
         }
     }
 }
-// ********************************************************************redirect
-function redirect() {
-        window.location.href = "./ToDo.html";
-}
-// ***************************************************************validLogin
+// ******user login validations(email and password) *******************************************//
 function validaLogin()
 {
     flag=false;
@@ -73,4 +82,4 @@ function validaLogin()
              flag=true;
     }
 }
-// *********************************************************************************end
+// *********************************************************************************end here

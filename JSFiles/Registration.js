@@ -1,10 +1,17 @@
-// ********************************************************************falg
- let check=false;
+(function()
+{
+        if(!localStorage)
+        {
+            alert("Your Broswer doesn't support localstroage");
+        }
+})();
+// *******************************************************************declare flag globally
+let check=false;
 let pass1 = false;
 let first = false;
 let lastName = false;
 let Mail = false;
-// ***********************************************************************submitRec
+// *********store user info to localstore*********//
 function submitRec()
 {
     if(pass1==true && first==true && lastName==true && Mail==true)
@@ -44,7 +51,7 @@ else{
     alert("Please Enter all details");
     }
 }
-// ********************************************************************validateUser
+// **********check user alredy exist or not**********//
 function validateUser(obj)
 {
     let existing = JSON.parse(localStorage.getItem('Email')) || [];
@@ -64,16 +71,16 @@ function validateUser(obj)
         if(!flag){
             existing.push(obj);
             localStorage.setItem('Email',JSON.stringify(existing));
-            redirect();
+            reDirect();
         }
     }else{
         existing.push(obj);
         localStorage.setItem('Email',JSON.stringify(existing));
-        redirect();
+        reDirect();
     }         
 }
-// ********************************************************************************validpassword
-function validatepass(password)
+// ************validation for user password******************//
+function validatePass(password)
 {
     pass1=false;
     if(password.length<8 || password=="")
@@ -87,8 +94,8 @@ function validatepass(password)
          document.getElementById("error").style.display="none";
     }
 }
-// ******************************************************************validFirst Name
-function validfname()
+// ********validations for user first name****************************//
+function validFname()
 {
     first = false;
     let Fname=document.getElementById("FirstName").value;
@@ -110,8 +117,8 @@ function validfname()
              document.getElementById("namef").style.visibility="hidden";
         }
 }
-// ******************************************************************validLastName
-function validlname()
+// *************validations for user last name********************//
+function validLname()
 {
         let Lname=document.getElementById("LastName").value;
         lastName = false;
@@ -134,28 +141,29 @@ function validlname()
                 lastName = true;
             }
 }
-// ***************************************************************validMail
-function mail(maill)
+// **********validations for user mail***********************//
+function mailValidation(userMail)
 {
     var filter = /^[a-zA-z0-9._]{5,10}@[gmail.]{5,6}[.][a-z.]{3,6}$/;
     Mail=false;
-    if(!(maill.match(filter)) || maill==null || maill =="")
+    if(!(userMail.match(filter)) || userMail==null || userMail =="")
     {
-        document.getElementById("mail1").innerHTML="Please Enter your valid mail";
-        document.getElementById("mail1").style.color="red";
-        document.getElementById("mail1").style.visibility="visible";
+        document.getElementById("mailErrorbox").innerHTML="Please Enter your valid mail";
+        document.getElementById("mailErrorbox").style.color="red";
+        document.getElementById("mailErrorbox").style.visibility="visible";
     }
     else
     {
         Mail=true;
-        document.getElementById("mail1").style.visibility="hidden";
+        document.getElementById("mailErrorbox").style.visibility="hidden";
     }
 }
-// *************************************************************************redirect
-function redirect()
+// *********redirect to login page after submit*******************//
+function reDirect()
 {
-    window.location.href="./Login.html";
+    window.location.href="index.html";
 }
+//*************convert user profile into base64 i.e into string *****//////
 function UploadProfilePicture() 
 {
     let Image = document.getElementById("inpFile").files[0];
@@ -170,4 +178,4 @@ function UploadProfilePicture()
         document.getElementById("viewProfile").src = imgdata;
     };
 }
-// ***************************************************************************end
+// *****************************************************************Code end here
