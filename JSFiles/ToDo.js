@@ -142,7 +142,7 @@ function deleteTodo() {
   printData();
   noData();
 }
-// *************Done Status after done***********************************************//
+// *************Done Status after done todo***********************************************//
 function statusDone() {
   for (var t = data.todo.length - 1; t >= 0; t--) {
     if (checkBoxes[t].checked == true) {
@@ -178,7 +178,7 @@ function editToDo(i) {
   document.getElementById("save").style.display = "inline-block";
   e = i;
 }
-// *************save changes after todo *************************************//
+// *************save changes after edit todo *************************************//
 function saveChanges() {
   let editData = data.todo[e];
   editData.name = document.getElementById("title").value;
@@ -206,7 +206,7 @@ function saveChanges() {
   printData();
   document.getElementById("form").reset();
 }
-// ******************************************************************************date Validation
+// **************validation for todo date and due date****************************//
 function dateValidation() {
   let date = document.getElementById("date").value;
   let date1 = document.getElementById("due").value;
