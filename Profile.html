@@ -8,7 +8,7 @@
     <body>
         <div class="container">
             <div class="image-preview" id="imagePreview">
-                <img src="" alt="image Preview" class="image-preview__image" id="viewProfile">
+                <img src="" alt="" class="image-preview__image" id="viewProfile">
             </div>
             <input type="file" accept="image/*" style="margin-top:5px; display: inline-block;" id="inpFile" onchange="UploadProfilePicture(event)">
             <input type="text" class="input1" id="FNAME" name="fname"  disabled>
@@ -16,12 +16,12 @@
             <input type="text" class="email" id="email" disabled><br>
             <!-- <input type="text" class="gender" id="gender" disabled><br> -->
             &nbsp &nbsp &nbsp &nbsp &nbsp Gender:<br>
-          &nbsp &nbsp &nbsp  &nbsp &nbsp <input type="radio" name="gender"  class="radio1" id="rad1" value="Female">Female&nbsp;
-           &nbsp <input type="radio" name="gender"  class="radio1" id="rad2"  value="Male">Male&nbsp;
-           &nbsp <input type="radio" name="gender" class="radio1" id="rad3" value="Other">Other&nbsp;
+          &nbsp &nbsp &nbsp  &nbsp &nbsp <input type="radio" name="gender"  class="radio1" value="Female">Female&nbsp;
+           &nbsp <input type="radio" name="gender"  class="radio1"   value="Male">Male&nbsp;
+           &nbsp <input type="radio" name="gender" class="radio1"  value="Other">Other&nbsp;
 
             <input type="text"  class="add" id="add" disabled><br>
-            <button type="button" id="btn" >Edit Profile</button>
+            <button type="button" id="btn" onclick="editBtn();">Edit Profile</button>
             <button type="button"  id="btn1" onclick="saveData();">Save</button>
         </div>
         <script src="JSFiles/Profile.js"></script>
