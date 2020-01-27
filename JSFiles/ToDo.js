@@ -266,7 +266,7 @@ function filter() {
 function deleteDoto(i) {
   table.deleteRow(i + 1);
   data.todo.splice(i, 1);
-  localStorage.setItem('Email',Localdata);
+  localStorage.setItem('Email',JSON.stringify(Localdata));
   printData();
 }
 // **********************************************************************************End
