@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/Registration.css">
+        <title>Registration</title>
+    </head>
+<body>
+    <header>
+       <a href="#"<div class="leftDiv">
+            <span>Home</span>
+            <span style="margin-left: 5px;">About Us</span>
+        </div></a>
+        <a href="./index.html" class="signUp">SignUp</a>
+    </header>
+        <div class="container">
+            <form>
+                <p class="reg" id="myform">Registration</p>
+                <div class="marginbox">
+                    <label for="firstName">First Name<span class="field">*</span></label>
+                    <label for="lastname" class="lastName">Last Name<span class="field">*</span></label>
+                    <input type="text" id="FirstName" placeholder="First Name" name="fname" onchange="validFname()" style="border:1px solid;" required>
+                    <input type="text" id="LastName" placeholder="Last Name" name="lname" onchange="validLname()" style="border:1px solid;" required>
+                    <div id="namef"></div>
+                    <div id="namel"></div>
+
+                    <label for="Email" class="email">Email<span class="field">*</span></label><br>
+                    <input type="text" id="emailbox" placeholder="Enter Email" style="border:1px solid;"  onchange="mailValidation(this.value);">
+                    <div id="mailErrorbox"></div>
+
+                    <label for="gender" class="gender">Gender</label>
+                    <input type="radio" name="gender"  class="radio1"  value="Female">Female
+                    <input type="radio" name="gender"  class="radio1"   value="Male">Male
+                    <input type="radio" name="gender" class="radio1"  value="Other">Other<br>
+
+                    <label for="add" class="email">Enter Address</label><br>
+                    <textarea name="address" rows="5" cols="40" id="address" style="border:1px solid;"></textarea>
+
+                    <label for="pass" class="email">Enter Password<span class="field">*</span></label><br>
+                    <input type="password" id="password"  placeholder="Password" onchange="validatePass(this.value)" style="border:1px solid;">
+                    <div id="error"></div> 
+
+                    <label for="pic" class="email">Add Profile Picture</label><br>
+                    <input type="file" accept="image/*" style="margin-top:5px; display: inline-block;" id="inpFile" onchange="UploadProfilePicture(event)">
+                    <div class="image-preview" id="imagePreview">
+                        <img src="./images/profile.png" alt="image Preview" class="image-preview__image" id="viewProfile">
+                    </div>
+                
+                </div>
+                <button type="button"  onclick="submitRec()">Submit</button>
+                <button type="reset" class="reset" value="Reset" id="reset1">Reset</button>
+            </form>
+        </div>
+    <script src="JSFiles/Registration.js"></script>
+    </body>
+</html>
