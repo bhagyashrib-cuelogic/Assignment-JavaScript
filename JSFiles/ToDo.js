@@ -29,10 +29,10 @@ function init() {
   let name = document.getElementById("title").value;
   let date = document.getElementById("date").value;
   let date1 = document.getElementById("due").value;
-  let v = document.querySelectorAll('input[name="cat"]');
+  let category = document.querySelectorAll('input[name="cat"]');
   for (let i = 0; i < v.length; i++) {
-    if (v[i].checked == true) {
-      cat = v[i].value;
+    if (category[i].checked == true) {
+      cat = category[i].value;
     }
   }
   todo =
@@ -234,7 +234,7 @@ function validData() {
 // ********Show No todo item**********************************************************//
 function noData() {
   if (data.todo == "") {
-    // alert("No record Found");
+    alert("No record Found");
     document.getElementById("todoData").style.display = "none";
   }
   else {

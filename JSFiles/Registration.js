@@ -7,14 +7,14 @@
 })();
 // *******************************************************************declare flag globally
 let check=false;
-let pass1 = false;
-let first = false;
+let passWord = false;
+let firstName = false;
 let lastName = false;
 let Mail = false;
 // *********store user info to localstore*********//
 function submitRec()
 {
-    if(pass1==true && first==true && lastName==true && Mail==true)
+    if(passWord==true && firstName==true && lastName==true && Mail==true)
     {
     let fname=document.getElementById("FirstName").value;
     let lname=document.getElementById("LastName").value;
@@ -82,7 +82,7 @@ function validateUser(obj)
 // ************validation for user password******************//
 function validatePass(password)
 {
-    pass1=false;
+    passWord=false;
     if(password.length<8 || password=="")
     {
         document.getElementById("error").innerHTML="Password length is too short";
@@ -97,7 +97,7 @@ function validatePass(password)
 // ********validations for user first name****************************//
 function validFname()
 {
-    first = false;
+    firstName = false;
     let Fname=document.getElementById("FirstName").value;
     var letters = /^[A-Za-z]+$/;
     if(Fname=="" || Fname==null)

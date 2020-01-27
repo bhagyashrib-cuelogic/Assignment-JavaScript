@@ -13,13 +13,6 @@ body
   margin-top:30px;
   background-color: #EDEDED;
 }
-
-header{
-  border-radius: 10px;
-  width:900px;
-  background-color: #563D7C;
-  height:60px;
-}
 .Profile
 {
   background-color: #ffffff;
@@ -103,7 +96,6 @@ button{
 
 td, th {
   border-bottom:1px solid #000;
-  /* border: 1px solid #000;  */
   text-align: left;
   padding: 8px;
 }
@@ -148,7 +140,6 @@ input{ margin-top: 5px; }
 .modal {
   display: none; /* Hidden by default */
   position:fixed; /* Stay in place */
-  /* z-index: 1; Sit on top */
   right: 500px;
   top: 200px;
   width: 300px; /* Full width */
