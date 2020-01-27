@@ -30,7 +30,7 @@ function init() {
   let date = document.getElementById("date").value;
   let date1 = document.getElementById("due").value;
   let category = document.querySelectorAll('input[name="cat"]');
-  for (let i = 0; i < v.length; i++) {
+  for (let i = 0; i < category.length; i++) {
     if (category[i].checked == true) {
       cat = category[i].value;
     }

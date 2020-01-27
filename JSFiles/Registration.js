@@ -92,7 +92,7 @@ function validatePass(password)
     }
     else
     {
-         pass1 = true;
+         passWord = true;
          document.getElementById("error").style.display="none";
     }
 }
@@ -115,7 +115,7 @@ function validFname()
             document.getElementById("namef").style.visibility="visible";
         }
         else{
-             first=true;
+             firstName=true;
              document.getElementById("namef").style.visibility="hidden";
         }
 }
