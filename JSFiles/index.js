@@ -13,6 +13,7 @@
       location.window.href="./index.html";
   }
 });
+//**user login validations */
 function LoginUser() {
     let loginId = document.getElementById("loginid").value;
     let password = document.getElementById("passUser").value;

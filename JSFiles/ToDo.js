@@ -262,7 +262,7 @@ function filter() {
     }
   }
 }
-// ************delete Doto item after done************************************************
+// ************delete Doto item after done************************************//
 function deleteDoto(i) {
   table.deleteRow(i + 1);
   data.todo.splice(i, 1);
