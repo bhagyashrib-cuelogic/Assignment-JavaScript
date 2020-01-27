@@ -5,13 +5,15 @@
             alert("Your Broswer doesn't support localstroage");
         }
 })();
-// *******************************************************************declare flag globally
+// ****************Declare globally flag******************************
 let check=false;
 let passWord = false;
 let firstName = false;
 let lastName = false;
 let Mail = false;
-// *********store user info to localstore*********//
+/**
+ * store information of user into databse
+ */
 function submitRec()
 {
     if(passWord==true && firstName==true && lastName==true && Mail==true)
@@ -51,7 +53,7 @@ else{
     alert("Please Enter all details");
     }
 }
-// **********check user alredy exist or not**********//
+//** check user exist alredy or not */
 function validateUser(obj)
 {
     let existing = JSON.parse(localStorage.getItem('Email')) || [];
@@ -94,7 +96,7 @@ function validatePass(password)
          document.getElementById("error").style.display="none";
     }
 }
-// ********validations for user first name****************************//
+//** validation for first name**//
 function validFname()
 {
     firstName = false;
@@ -117,7 +119,7 @@ function validFname()
              document.getElementById("namef").style.visibility="hidden";
         }
 }
-// *************validations for user last name********************//
+//** Validations for last name */
 function validLname()
 {
         let Lname=document.getElementById("LastName").value;
@@ -141,7 +143,7 @@ function validLname()
                 lastName = true;
             }
 }
-// **********validations for user mail***********************//
+//** validations for user mail */
 function mailValidation(userMail)
 {
     var filter = /^[a-zA-z0-9._]{5,10}@[gmail.]{5,6}[.][a-z.]{3,6}$/;
@@ -158,12 +160,12 @@ function mailValidation(userMail)
         document.getElementById("mailErrorbox").style.visibility="hidden";
     }
 }
-// *********redirect to login page after submit*******************//
+//**redirect page to login page  */
 function reDirect()
 {
     window.location.href="index.html";
 }
-//*************convert user profile into base64 i.e into string *****//////
+//**convert user profile into base64 i.e into string *// 
 function UploadProfilePicture() 
 {
     let Image = document.getElementById("inpFile").files[0];
